@@ -1,0 +1,528 @@
+﻿@model Preora.Models.SaleReturnModel
+@{
+    ViewBag.Title = "SaleReturn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #container {
+        text-align: center
+    }
+
+    #employee-table {
+        border: 1px solid #aaa
+    }
+</style>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h4 class="mb-0 text-white">Sale Return</h4>
+                </div>
+                <div class="card-body p-4">
+                    @using (Html.BeginForm("SaleReturn", "Admin", FormMethod.Post, new { @class = "row g-3 needs-validation" }))
+                    {
+                        @Html.HiddenFor(x => x.id)
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label">Customer Name</label>
+                                    @Html.TextBoxFor(x => x.SR_custname, new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label">Date</label>
+                                    @Html.TextBoxFor(x => x.SR_billdate, new { @type = "date", @class = "form-control", @Value = DateTime.Now.ToString("yyyy'-'MM'-'dd") })
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="row mb-3 mt-3">
+                                <div class="col-md-3 mb-1">
+                                    <label>Product</label>
+                                    @Html.DropDownList("cat_idn", ViewBag.ItemHeadSR as SelectList, "--Select Product--", new { @class = "form-control", @id = "prid", @onchange = "javascript:Getprodetail();" })
+                                </div>
+                                <div class="col-md-3 mb-1">
+                                    <label>Measurement Unit</label>
+                                    <input type="text" class="form-control" id="munit" placeholder="Unit" readonly="readonly" />
+                                </div>
+                                <div class="col-md-3 mb-1">
+                                    <label>MRP</label>
+                                    <input type="text" class="form-control" id="mrprate" placeholder="MRP" />
+                                </div>
+                                <div class="col-md-3 mb-1">
+                                    <label>Sale Rate</label>
+                                    <input type="number" class="form-control" id="price" readonly="readonly" placeholder="Rate" />
+                                </div>
+                                <div class="col-md-3 mb-1">
+                                    <label>Quantity</label>
+                                    <input type="number" class="form-control" id="qty" placeholder="Quantity" value="1" onblur="myFunction(); mysgst(); mycgst(); myIgst(); finalAmt();" />
+                                </div>
+                                <div class="col-md-3 mb-1">
+                                    <label>HSN/SAC</label>
+                                    <input type="text" class="form-control" id="hsn" placeholder="HSN/SAC" />
+                                </div>
+                                @*<div class="col-md-3 mb-1">
+                                    <label>Gross Amount</label>
+                                    <input type="number" class="form-control" id="total" readonly="readonly" placeholder="Total Price" />
+                                </div>*@
+                                @*<div class="col-md-3 mb-1">
+                                    <label>Discount(%)</label>
+                                    <input type="number" class="form-control" id="dis" placeholder="Disc(%)" onblur="mydisc(); finalAmt();" />
+                                </div>*@
+                                @*<div class="col-md-3 mb-1">
+                                    <label>Discount Amount</label>
+                                    <input type="number" class="form-control" id="disc" placeholder="Discount" min="0" value="0.00" readonly="readonly" />
+                                </div>*@
+                                <div class="col-md-3 mb-1">
+                                    <label>SGST(%)</label>
+                                    <input type="number" class="form-control" id="sgstper" placeholder="SGST(%)" readonly="readonly" />
+                                </div>
+                                <div class="col-md-3 mb-1">
+                                    <label>SGST Amount</label>
+                                    <input type="number" class="form-control" id="sgst" placeholder="SGST" readonly="readonly" />
+                                </div>
+                                <div class="col-md-3 mb-1">
+                                    <label>CGST(%)</label>
+                                    <input type="number" class="form-control" id="cgstper" placeholder="CGST(%)" readonly="readonly" />
+                                </div>
+                                <div class="col-md-3 mb-1">
+                                    <label>CGST Amount</label>
+                                    <input type="number" class="form-control" id="cgst" placeholder="CGST" readonly="readonly" />
+                                </div>
+                                @*<div class="col-md-3 mb-1">
+                                    <label>IGST(%)</label>
+                                    <input type="number" class="form-control" id="igstper" placeholder="IGST(%)" readonly="readonly" />
+                                </div>
+                                <div class="col-md-3 mb-1">
+                                    <label>IGST Amount</label>
+                                    <input type="number" class="form-control" id="igst" placeholder="IGST" readonly="readonly" />
+                                </div>*@
+                                @*<div class="col-md-3 mb-1">
+                                    <label>Item Sale Tax</label>
+                                    <div class="form-control">
+                                        Tax Include :
+                                        <input type="radio" name="saletax" id="inc" readonly />
+                                        Tax Exclude :
+                                        <input type="radio" name="saletax" id="exc" readonly />
+                                    </div>
+                                </div>*@
+                                
+                                <div class="col-md-3 mb-1">
+                                    <label>Final Amount</label>
+                                    <input type="number" class="form-control" id="total" placeholder="Final Amount" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10"></div>
+                                <div class="col-md-2 mb-2">
+                                    <button type="button" class="btn btn-primary px-3" id="submit">Add</button>
+                                    <button type="button" class="btn btn-danger px-3" onclick="deleteRow();">Delete</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" id="container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="myTable" style="padding: 10px; margin-top: 10px; margin-bottom: 10px;">
+                                    <tr class="bg-info">
+                                        <th class="text-white">Product</th>
+                                        <th class="text-white">Quantity</th>
+                                        <th class="text-white">Unit</th>
+                                        <th class="text-white">MRP</th>
+                                        <th class="text-white">Rate</th>
+                                        @*<th>Gross Amt.</th>*@
+                                        @*<th>Discount</th>*@
+                                        <th class="text-white">SGST</th>
+                                        <th class="text-white">CGST</th>
+                                        @*<th>IGST</th>*@
+                                        <th class="text-white">HSN/SAC</th>
+                                        @*<th>Amount</th>*@
+                                        <th class="text-white">Gross Amt.</th>
+                                        <th class="text-white">Action</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-7"></div>
+                            <div class="col-md-5">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="control-label">Gross Amount</label>
+                                        @Html.TextBoxFor(x => x.SR_GrossAmt, new { @type = "number", @class = "form-control", @id = "prodprice", @required = "required", @readonly = "readonly", @onclick = "sumtotal(); sumsgst(); sumcgst(); sumigst(); finalbill();" })
+                                    </div>
+                                </div>
+                                @*<div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="control-label">Discount</label>
+                                        @Html.TextBoxFor(x => x.SR_Discount, new { @type = "number", @id = "discamt", @class = "form-control", @Value = "0.00", @onchange = " finalbill();" })
+                                    </div>
+                                </div>*@
+                                <div class="row">
+                                    <label class="control-label">Additional Disc</label>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            @Html.TextBoxFor(x => x.SR_Discount, new { @type = "number", @id = "discpercent", @class = "form-control",  @placeholder = "%", @onblur = "discper()" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            @Html.TextBoxFor(x => x.SR_AdditionalDisc, new { @type = "number", @id = "addiscamt", @class = "form-control", @Value = "0.00", @onchange = "finalbill()" })
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="control-label">SGST</label>
+                                        @Html.TextBoxFor(x => x.SR_SGST, new { @type = "number", @class = "form-control", @id = "sprice", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="control-label">CGST</label>
+                                        @Html.TextBoxFor(x => x.SR_CGST, new { @type = "number", @class = "form-control", @id = "cprice", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                @*<div class="col-md-12">
+                                    <div class="mb-1">
+                                        <label class="control-label">IGST</label>
+                                        @Html.TextBoxFor(x => x.SR_IGST, new { @type = "number", @class = "form-control", @id = "iprice", @readonly = "readonly" })
+                                    </div>
+                                </div>*@
+                                <div class="col-md-12">
+                                    <div class="mb-1">
+                                        <label class="control-label">Other Charges</label>
+                                        @Html.TextBoxFor(x => x.SR_othercharge, new { @type = "number", @class = "form-control", @id = "loading", @Value = "0.00", @onchange = "finalbill()" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-1">
+                                        <label class="control-label">Final Amount</label>
+                                        @Html.TextBoxFor(x => x.SR_FinalAmt, new { @type = "number", @class = "form-control", @id = "finalamt", @required = "required", @readonly = "readonly", @onclick = "finalbill()" })
+                                    </div>
+                                </div>
+                                @*<div class="col-md-12">
+                                    <div class="mb-1">
+                                        <label class="control-label">Paid Amount</label>
+                                        @Html.TextBoxFor(x => x.SR_PaidAmt, new { @type = "number", @class = "form-control", @id = "pamt", @onblur = "pdamt()", @Value = "0.00" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-1">
+                                        <label class="control-label">Balance Amount</label>
+                                        @Html.TextBoxFor(x => x.SR_BalanceAmt, new { @type = "number", @class = "form-control", @id = "balamt" })
+                                    </div>
+                                </div>*@
+                                <div class="col-md-12">
+                                    <div class="mb-1">
+                                        <label class="control-label">Pay Mode</label>
+                                        <select name="SR_paymode" class="form-control" required>
+                                            <option value="CASH">CASH</option>
+                                            <option value="UPI">UPI</option>
+                                            <option value="TRANSFER">TRANSFER</option>
+                                            <option value="CARD">CARD</option>
+                                            <option value="CHEQUE">CHEQUE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <button type="submit" class="btn btn-dark">
+                                    Save
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+            </div>
+        </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fsvs/1.2.2/js/bundle.min.js"></script>
+
+<script>
+    $("#myTable").on('click', '.btnDelete', function () {
+        $(this).closest('tr').remove();
+    });
+</script>
+<script type="text/javascript">
+    /* This method will add a new row */
+    $("#submit").click(function (e) {
+        e.preventDefault();
+        var sel = document.getElementById('prid');
+        var val = sel.options[sel.selectedIndex].value;
+        var valu = sel.options[sel.selectedIndex].text;
+        var val1 = $("#qty").val();
+        var val2 = $("#price").val();
+        //var val3 = $("#total").val();
+        var val4 = $("#mrprate").val();
+        var val5 = $("#sgst").val();
+        var val6 = $("#cgst").val();
+        //var val7 = $("#igst").val();
+        var val8 = $("#hsn").val();
+        var val9 = $("#total").val();
+        var val10 = $("#munit").val();
+        $('#myTable').append('<tr><td><input type="text" readonly value="' + valu + '"><input name="SR_itemhead_id_arr[]" type="text" style="display:none; readonly" value=' + val + '></td><td><input type="text" class="addss" name="SR_item_qty_arr[]" readonly value=' + val1 + '><td><input type="text" name="" readonly value=' + val10 + '></td></td><td><input type="text" name="SR_item_MRP_arr[]" readonly value=' + val4 + '></td></td><td><input type="text" name="SR_item_rate_arr[]" readonly value=' + val2 + '></td></td><td><input type="text" class="sadd" name="SR_sgst_amt_arr[]" readonly  value=' + val5 + '></td></td><td><input type="text" class="cadd" name="SR_cgst_amt_arr[]" readonly  value=' + val6 + '></td></td><td><input type="text" name="SR_HSN_SAC_arr[]" readonly  value=' + val8 + '></td></td><td><input type="text" class="priceadd" name="SR_finalprod_amt_arr[]" readonly  value=' + val9 + '></td><td> <button type="button" class="btn btn-danger px-4 btnDelete">Delete</button></td></tr>');
+        $('#prid').val('');
+        $("#qty").val('1');
+        $("#price").val('');
+        $("#total").val('');
+        $("#mrprate").val('');
+        //$("#dis").val('');
+        $("#sgst").val('');
+        $("#cgst").val('');
+        //$("#igst").val('');
+        $("#sgstper").val('');
+        $("#cgstper").val('');
+        $("#igstper").val('');
+        $("#hsn").val('');
+        $("#finamnt").val('');
+        $("#munit").val('');
+        $("#inc").val('');
+        $("#exc").val('');
+        $("#inc").prop("checked", false);
+        $("#exc").prop("checked", false);
+        sumtotal();
+        sumsgst();
+        sumcgst();
+        finalbill();
+    });
+
+
+    /* This method will delete a row */
+    function deleteRow(ele) {
+        var table = document.getElementById('myTable');
+        var rowCount = table.rows.length;
+        if (rowCount <= 1) {
+            alert("There is no row available to delete!");
+            return;
+        }
+        if (ele) {
+            //delete specific row
+            ele.parentNode.parentNode.remove();
+        }
+        else {
+            //delete last row
+            table.deleteRow(rowCount - 1);
+        }
+    }
+</script>
+<script>
+    function sumtotal() {
+
+        var sum = 0;
+        $('.priceadd').each(function () {
+            sum += parseFloat($(this).val());
+
+        });
+
+        document.getElementById("prodprice").value = sum;
+    }
+    function sumsgst() {
+
+        var sum = 0;
+        $('.sadd').each(function () {
+            sum += parseFloat($(this).val());
+
+        });
+
+        document.getElementById("sprice").value = sum;
+    }
+    function sumcgst() {
+
+        var sum = 0;
+        $('.cadd').each(function () {
+            sum += parseFloat($(this).val());
+
+        });
+
+        document.getElementById("cprice").value = sum;
+    }
+    function sumigst() {
+
+        var sum = 0;
+        $('.iadd').each(function () {
+            sum += parseFloat($(this).val());
+
+        });
+
+        document.getElementById("iprice").value = sum;
+    }
+    function sumAmounts() {
+
+        var sum = 0;
+        $('.addss').each(function () {
+            sum += parseFloat($(this).val());
+
+        });
+
+        document.getElementById("bsValida").value = sum;
+    }
+
+    function finalAmt() {
+        var sum = 0;
+        var sum1 = 0;
+        var sum2 = 0;
+        if ($("#qty").val() == "") {
+            alert('Please Fill Quantity');
+            $("#qty").focus();
+            $("#dis").val('');
+            return false;
+        }
+        var t2 = parseInt($("#total").val());
+        /*var t3 = parseInt($("#disc").val());*/
+        var t4 = parseInt($("#sgst").val());
+        var t5 = parseInt($("#cgst").val());
+        /*var t6 = parseInt($("#igst").val());*/
+        var t7 = $("#exc").val();
+        var t8 = $("#inc").val();
+        if (t7 == "false") {
+            sum = t2 + t4 + t5;
+            sum1 = sum;
+            document.getElementById("finamnt").value = sum1;
+        }
+        if (t8 == "true") {
+            sum2 = t2;
+            document.getElementById("finamnt").value = sum2;
+        }
+
+    }
+    function finalbill() {
+
+        var sum = 0;
+        var sum1 = 0;
+        var t2 = parseFloat($("#prodprice").val());
+        //var t3 = parseFloat($("#discamt").val());
+        var t4 = parseFloat($("#addiscamt").val());
+        var t5 = parseFloat($("#loading").val());
+        sum1 = t2 + t5;
+        sum = sum1 - t4;
+        //sum = parseFloat(t1 + t2 + t3 + t4);
+
+        document.getElementById("finalamt").value = sum;
+    }
+    function pdamt() {
+
+        var sum = 0;
+        var t2 = parseFloat($("#finalamt").val());
+        var t3 = parseFloat($("#pamt").val());
+
+        sum = t2 - t3;
+        //sum = parseFloat(t1 + t2 + t3 + t4);
+
+        document.getElementById("balamt").value = sum;
+    }
+
+</script>
+<script>
+    function myFunction() {
+        var qty = $("#qty").val();
+        var pri = $("#price").val();
+        var total = qty * pri;
+        $("#total").val(total);
+
+    }
+    function mydisc() {
+        var perc = $("#total").val();
+        var ds = $("#dis").val();
+        var total1 = ((ds / 100) * perc).toFixed(2);
+        $("#disc").val(total1);
+
+    }
+    function mysgst() {
+        var perc = $("#total").val();
+        var ds = $("#sgstper").val();
+        var total2 = ((ds / 100) * perc).toFixed(2);
+        $("#sgst").val(total2);
+
+    }
+    function mycgst() {
+        var perc = $("#total").val();
+        var ds = $("#cgstper").val();
+        var total3 = ((ds / 100) * perc).toFixed(2);
+        $("#cgst").val(total3);
+
+    }
+    function myIgst() {
+        var perc = $("#total").val();
+        var ds = $("#igstper").val();
+        var total4 = ((ds / 100) * perc).toFixed(2);
+        $("#igst").val(total4);
+
+    }
+    function Getprodetail() {
+        var per = document.getElementById('prid');
+        var sv = per.options[per.selectedIndex].value;
+        $("#price").empty();
+        $("#sgstper").empty();
+        $("#cgstper").empty();
+        $("#igstper").empty();
+        $("#munit").empty();
+        $("#hsn").empty();
+        $("#total").empty();
+        $("#cgst").empty();
+        $("#sgst").empty();
+        var ajaxCallURL = '../Admin/Getdetail?pid=' + sv;
+        var options = { "backdrop": "static", keyboard: true };
+        $.ajax({
+            type: "GET",
+            url: ajaxCallURL,
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            success: function (data) {
+                var rate = data.itemSaleRate;
+                var mrp = data.itemMRP;
+                var c = data.itemCGST;
+                var s = data.itemSGST;
+                var i = data.itemIGST;
+                var h = data.itemHSN_SAC;
+                var t = data.itemSaleTax;
+                var u = data.itemMeasureUnit;
+                $("#price").val(rate);
+                $("#mrprate").val(mrp);
+                $("#sgstper").val(s);
+                $("#cgstper").val(c);
+                $("#igstper").val(i);
+                $("#munit").val(u);
+                $("#hsn").val(h);
+                $("#total").val(rate);
+                if (t == true) {
+                    $("#inc").val(t);
+                    $("#inc").prop("checked", true);
+                }
+                if (t == false) {
+                    $("#exc").val(t);
+                    $("#exc").prop("checked", true);
+                }
+                var total3 = ((c / 100) * rate).toFixed(2);
+                $("#cgst").val(total3);
+                var total2 = ((s / 100) * rate).toFixed(2);
+                $("#sgst").val(total2);
+            },
+            error: function (ex) {
+                $("#price").val(0);
+                $("#sgstper").val(0);
+                $("#cgstper").val(0);
+                $("#igstper").val(0);
+                $("#munit").val(0);
+                $("#hsn").val(0);
+                $("#total").val(0);
+            }
+        });
+        return false;
+    };
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

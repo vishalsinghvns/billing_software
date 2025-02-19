@@ -1,0 +1,141 @@
+﻿@model Preora.Models.ItemHeadModel
+@{
+    Layout = null;
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">Print Barcodes</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+
+            @using (Html.BeginForm("Add_CityPartial", "SuperAdmin", FormMethod.Post))
+            {
+
+                @Html.AntiForgeryToken()
+                <div class="col-sm-12">
+                    @Html.HiddenFor(model => model.id)
+                    <label>Barcode</label>
+                    <img src="~/BarcodeImages/@Model.itembarcodeimg" />
+                </div>
+                <div class="col-sm-12">
+                    @Html.HiddenFor(model => model.id)
+                    <label>Count</label>
+
+                    <input type="number" name="counts" id="counts" class="form-control" />
+                </div>
+                <div class="clear-fix"> &nbsp;</div>
+                <button type="button" id="@Model.id" onclick="javascript: Getbarcode(this.id, document.getElementById('counts').value)" class="btn btn-success rounded-pill px-4">Print</button>
+                <a href="~/Admin/BarcodeList"><button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button></a>
+                <div class="clear-fix"> &nbsp;</div>
+
+            }
+        </div>
+    </div>
+    <div id="divprint"></div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+<script>
+    function Getbarcode(ids, cont) {
+        //alert(ids);
+        //alert(cont);
+
+        var ajaxCallURL = '../Admin/GetBarcode?pid=' + ids;
+        var options = { "backdrop": "static", keyboard: true };
+        $.ajax({
+            type: "GET",
+            url: ajaxCallURL,
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            success: function (data) {
+                var bar = data.itembarcodeimg;
+                var vals = ""; // Fix: Initialize val variable
+                //var sv1 = $("#cnt").val();
+                //var sv1 = $("#cnt").attr(ids);
+                //alert(sv1);
+                /*document.querySelector('#imageContainer').innerHTML = newImage.outerHTML;*/
+                for (var i = 0; i < cont; i++) { // Fix: Change <= to <
+                    var im = "<img src='/BarcodeImages/" + bar +"' style='float:left;margin-bottom:10px;width:50%' />"
+                    //var im = "<img src='/BarcodeImages/"+ bar +"' />"; // Fix: Concatenate bcrc variable
+                    vals += im; // Fix: Change im + = to +=
+                }
+                //$("#divprint").append(vals);
+                var s = $("#divprint").append(vals);
+                var HTML_Width = $(s).width();
+                var HTML_Height = $(s).height();
+                var top_left_margin = 15;
+                var PDF_Width = HTML_Width + (top_left_margin * 2);
+                var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+                var canvas_image_width = HTML_Width;
+                var canvas_image_height = HTML_Height;
+
+                var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+
+                html2canvas($(s)[0], { allowTaint: true }).then(function (canvas) {
+                    canvas.getContext('2d');
+
+                    console.log(canvas.height + "  " + canvas.width);
+
+
+                    var imgData = canvas.toDataURL("image/jpeg", 1.0);
+                    var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+                    pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+
+
+                    for (var i = 1; i <= totalPDFPages; i++) {
+                        pdf.addPage(PDF_Width, PDF_Height);
+                        pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+                    }
+
+                    pdf.save("PreoraBarcode.pdf");
+                    window.setTimeout(function () {
+                        window.location.href = "/Admin/BarcodeList";
+                    }, 2000);
+                });
+                // Do something with the val variable, e.g., append it to a container
+                //$("#divprint").append(vals);
+
+                //var doc = new jsPDF();
+                //var specialElementHandlers = {
+                //    '#editor': function (element, renderer) {
+                //        return true;
+                //    }
+                //};
+
+                //doc.fromHTML($('#divprint').html(), 15, 15, {
+                //    'width': 170,
+                //    'elementHandlers': specialElementHandlers
+                //});
+                //doc.save('sample-file.pdf');
+            },
+            error: function (ex) {
+                $("#price").val(0);
+                $("#sgstper").val(0);
+            }
+        });
+        return false;
+    };
+
+</script>
+
+<script>
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#editor': function (element, renderer) {
+            return true;
+        }
+    };
+
+    $('#cmd').click(function () {
+        doc.fromHTML($('#content').html(), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+    });
+</script>

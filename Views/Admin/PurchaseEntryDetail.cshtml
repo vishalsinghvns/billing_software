@@ -1,0 +1,274 @@
+﻿@model Preora.Models.PurchaseVM
+@{
+    ViewBag.Title = "PurchaseEntryDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .table th, .table td, .table tbody tr td {
+        border-color: #000
+    }
+    p, body{
+        color:#000
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-4 mb-1 text-right">
+            <a href="javascript:void(0);" class="btn btn-danger bx bxs-file-pdf" id="btnPDF">PDF</a>
+            <a href="javascript:void(0);" class="btn btn-primary" onclick="printContent('dvmismatch')">Print</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                @foreach (var item in Model.BillVM)
+                {
+                    <div id="dvmismatch" class="printArea">
+                        @*<div class="card-header bg-info">
+                            <h4 class="mb-0 text-white">Purchase Entry Detail</h4>
+                        </div>*@
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <img src="/CompanyImg/@Model.CompLogo" class="rounded-circle" style="width:100px;height:70px;" />
+
+                                    <h3>Preora S.Md Daud Md Yaqub</h3>
+                                    <p>
+                                        K-016,First Floor Lulu Mall Lucknow (UP) , India<br />
+                                        GSTIN: 09AAGFU4653B1Z7 | State Code: 09 (Uttar Pradesh)
+                                    </p>
+                                    <h4>Purchase Entry Details</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-6">
+                                    <h4 class="mt-3">@Model.CompName</h4>
+                                    <p class="mb-0"><label class="control-label">Email:</label> @Model.CompEmail</p>
+                                    <p class="mb-0"><label class="control-label">Mobile No.-</label> @Model.CompPhone1</p>
+
+                                </div>
+                                <div class="col-lg-6 col-6 text-end">
+                                    @Html.HiddenFor(x => item.id)
+
+                                    <div class="col-md-12 mb-0">
+                                        <label class="control-label">Supplier Name :</label>
+                                        @Html.DisplayFor(x => item.supp_name, new { @class = "form-control" })
+
+                                    </div>
+                                    <div class="col-md-12 mb-0">
+                                        <label class="control-label">Invoice Number :</label>
+                                        @Html.DisplayFor(x => item.invoice_no, new { @type = "text", @class = "form-control" })
+
+                                    </div>
+                                    <div class="col-md-12 mb-0">
+                                        <label class="control-label">Date :</label>
+                                        @Html.DisplayFor(x => item.billdate, new { @type = "date", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-12 mb-0">
+                                        <label class="control-label">Due Date :</label>
+                                        @Html.DisplayFor(x => item.duedate, new { @type = "date", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row mt-2 mb-2" id="container">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border-color:#000;padding: 10px; margin-top: 10px; margin-bottom: 10px;">
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Unit</th>
+                                            <th>Rate</th>
+                                            <th>Gross Amt.</th>
+                                            <th>Discount</th>
+                                            <th>SGST</th>
+                                            <th>CGST</th>
+                                            <th>IGST</th>
+                                            <th>HSN/SAC</th>
+                                            <th>Amount</th>
+
+                                        </tr>
+                                        @foreach (var prd in Model.productVM)
+                                        {
+                                            <tr>
+                                                <td>@prd.prod_name</td>
+                                                <td>@prd.item_qty</td>
+                                                <td>@prd.measureunit</td>
+                                                <td>@prd.item_rate</td>
+                                                <td>@prd.gross_amt</td>
+                                                <td>@prd.disc_amt</td>
+                                                <td>@prd.sgst_amt</td>
+                                                <td>@prd.cgst_amt</td>
+                                                <td>@prd.igst_amt</td>
+                                                <td>@prd.HSN_SAC</td>
+                                                <td><i class="mdi mdi-currency-inr"></i>@prd.finalprod_amt</td>
+
+                                            </tr>
+
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            @*<div class="row">
+                                <div class="col-lg-9 col-sm-5"> </div>
+                                <div class="col-lg-3 col-sm-5 ms-auto">
+                                    <table class="table table-clear">
+                                        <tbody>
+                                            <tr>
+                                                <td class="left"><strong>Subtotal</strong></td>
+                                                <td class="right">$8.497,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="left"><strong>Discount (20%)</strong></td>
+                                                <td class="right">$1,699,40</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="left"><strong>VAT (10%)</strong></td>
+                                                <td class="right">$679,76</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="left"><strong>Total</strong></td>
+                                                <td class="right">
+                                                    <strong>$7.477,36</strong><br>
+                                                    <strong>0.15050000 BTC</strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                               </div>*@
+
+
+
+
+
+                                <div class="row">
+                                    <div class="col-lg-12 text-end">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">Gross Amount :</label>
+                                                    <i class="mdi mdi-currency-inr"></i>@Html.DisplayFor(x => item.GrossAmt, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">Discount :</label>
+                                                    @Html.DisplayFor(x => item.Discount, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">Additional Disc :</label>
+                                                    @Html.DisplayFor(x => item.AdditionalDisc, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">SGST :</label>
+                                                    @Html.DisplayFor(x => item.S_GST, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">CGST :</label>
+                                                    @Html.DisplayFor(x => item.C_GST, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">IGST :</label>
+                                                    @Html.DisplayFor(x => item.I_GST, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">Loading & Unloading Charge :</label>
+                                                    @Html.DisplayFor(x => item.LoadingCharge, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">Final Amount :</label>
+                                                    <i class="mdi mdi-currency-inr"></i>@Html.DisplayFor(x => item.FinalAmt, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">Paid Amount :</label>
+                                                    <i class="mdi mdi-currency-inr"></i>@Html.DisplayFor(x => item.PaidAmt, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">Balance Amount :</label>
+                                                    <i class="mdi mdi-currency-inr"></i>@Html.DisplayFor(x => item.BalanceAmt, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <label class="control-label">Pay Mode :</label>
+                                                    @Html.DisplayFor(x => item.pay_mode, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- terms start -->
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-8">
+                                        <h5 class="text-decoration-underline">Terms Conditions</h5>
+                                        <p class="mb-0">1. All subject to Lucknow Jurisdiction.</p>
+                                        <p class="mb-0">2. Our responsibility ceases as soon as goods leave our premisies.</p>
+                                        <p class="mb-0">3. Goods once sold can not taken back or exchanged.</p>
+                                        <p class="mb-0">Bank :- Kotak Mahindra Bank, Current A/c Number : 1445221739, IFSC Code : KKBK0005315</p>
+
+                                    </div>
+                                    <div class="col-lg-6 text-end mt-4 col-4">
+                                        <h5>(Authorised Signatory)</h5>
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <!-- //  terms end -->
+                            </div>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        function printContent(el) {
+            var restorepage = document.body.innerHTML;
+            var printcontent = document.getElementById(el).innerHTML;
+            document.body.innerHTML = printcontent;
+            window.print();
+            document.body.innerHTML = restorepage;
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        $("body").on("click", "#btnPDF", function () {
+            html2canvas($('.printArea')[0], {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("purchase-entry-Details.pdf");
+                }
+            });
+        });
+    </script>

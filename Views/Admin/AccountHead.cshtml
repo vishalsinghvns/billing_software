@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Preora.Models.AccHeadModel>
+@{
+    ViewBag.Title = "AccountHead";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/sweetAlert/sweetalert.css" rel="stylesheet" />
+<script src="~/sweetAlert/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+    function Confirmmessage(id) {
+        var alert = swal({
+            title: "Are you sure?",
+            text: "You want to delete this record?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#057346",
+            confirmButtonText: "Yes, Delete",
+            cancelButtonText: "No",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Admin/DelAccHead",
+                        data: { c_id: id },
+                        success: function (result) {
+                            swal("Success", "Deleted successfully..", "success");
+                            window.setTimeout(function () {
+                                window.location.href = "/Admin/AccountHead";
+                            }, 2000);
+                        }
+                    });
+                }
+                else {
+                    swal("Cancelled", "Sorry! Cancelled by you.", "error");
+                }
+            });
+
+    }
+</script>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                <h4 class="card-title mb-0">Account Head List</h4>
+                <a href="~/Admin/AddAccHead" class="btn btn-dark btn-sm"><i class="fa fa-plus"></i> Add Acc Head</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="file_export" class="table table-striped table-bordered display">
+                            <thead class="bg-info">
+                                <tr>
+                                    <th class="text-white">S. No.</th>
+                                    <th class="text-white">Acc Head</th>
+                                    <th class="text-white">Acc Head Code</th>
+                                    <th class="text-white">Acc Group</th>
+                                    <th class="text-white">Reg. Type</th>
+                                    <th class="text-white">Open Amount</th>
+                                    <th class="text-white">Contact Person</th>
+                                    <th class="text-white">Phone</th>
+                                    <th class="text-white">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.AccName</td>
+                                        <td>@item.AccCode</td>
+                                        <td>@item.AccGroupName</td>
+                                        <td>@item.RegType</td>
+                                        <td>@item.OpeningAmount</td>
+                                        <td>@item.AccContactPerson</td>
+                                        <td>@item.AccPhone</td>
+                                        
+                                        <td><a href="@Url.Action("AddAccHead", "Admin", new { c_id = item.id })" class="btn btn-primary shadow btn-xs sharp me-3"><i class="fas fa-pencil-alt"></i> </a><a onclick="return Confirmmessage(@item.id)" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i> </a></td>
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

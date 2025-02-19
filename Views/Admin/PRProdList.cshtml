@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Preora.Models.PurchaseReturnModel>
+@{
+    ViewBag.Title = "PRProdList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="border-bottom title-part-padding d-flex justify-content-between">
+                    <h4 class="card-title mb-0">Purchase Return Products List</h4>
+
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="file_export" class="table table-striped table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Bill Date</th>
+                                    <th>Product</th>
+                                    <th>Unit</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@Html.DisplayFor(modelItem => @item.PR_billdate)</td>
+                                        <td>@item.PR_prod_name</td>
+                                        <td>@item.PR_measureunit</td>
+                                        <td>@item.PR_item_qty</td>
+
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

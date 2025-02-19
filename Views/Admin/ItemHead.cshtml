@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Preora.Models.ItemHeadModel>
+@{
+    ViewBag.Title = "ItemHead";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/sweetAlert/sweetalert.css" rel="stylesheet" />
+<script src="~/sweetAlert/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+    function Confirmmessage(id) {
+        var alert = swal({
+            title: "Are you sure?",
+            text: "You want to delete this record?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#057346",
+            confirmButtonText: "Yes, Delete",
+            cancelButtonText: "No",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Admin/DelItemHead",
+                        data: { c_id: id },
+                        success: function (result) {
+                            swal("Success", "Deleted successfully..", "success");
+                            window.setTimeout(function () {
+                                window.location.href = "/Admin/ItemHead";
+                            }, 2000);
+                        }
+                    });
+                }
+                else {
+                    swal("Cancelled", "Sorry! Cancelled by you.", "error");
+                }
+            });
+
+    }
+</script>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h4 class="card-title mb-0">Item Head List</h4>
+                    <a href="~/Admin/AddItemHead" class="btn btn-dark btn-sm"><i class="fa fa-plus"></i> Add Product</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="file_export" class="table table-striped table-bordered display">
+                            <thead class="bg-info">
+                                <tr>
+                                    <th class="text-white">S. No.</th>
+                                    <th class="text-white">Product</th>
+                                    @*<th class="text-white">Generated Code</th>*@
+                                    <th class="text-white">Product Group</th>
+                                    <th class="text-white">Product Code</th>
+                                    <th class="text-white">Purchase Price</th>
+                                    <th class="text-white">Item MRP</th>
+                                    <th class="text-white">Available Qty.</th>
+                                    <th class="text-white">Unit</th>
+                                    <th class="text-white">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.itemName</td>
+                                        @*<td>@item.itemCode</td>*@
+                                        <td>@item.ItemGroup</td>
+                                        <td>@item.ProductCode</td>
+                                        <td>@item.itemPurchaseRate</td>
+                                        <td>@item.itemMRP</td>
+                                        <td>@item.itemAvlQty</td>
+                                        <td>@item.itemMeasureUnit</td>
+
+                                        <td><a href="@Url.Action("AddItemHead", "Admin", new { c_id = item.id })" class="btn btn-primary shadow btn-xs sharp me-3"><i class="fas fa-pencil-alt"></i> </a><a onclick="return Confirmmessage(@item.id)" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i> </a></td>
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,202 @@
+﻿@model Preora.Models.BarcodeModel
+@{
+    ViewBag.Title = "BarcodeList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>*@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="border-bottom title-part-padding d-flex justify-content-between">
+                    <h4 class="card-title mb-0">Barcode Section</h4>
+
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("PrintBarcode", "Admin", FormMethod.Post))
+                    {
+                        <div class="table-responsive">
+                            <table id="file_export" class="table table-striped table-bordered display">
+                                <thead>
+                                    <tr>
+                                        <th>S. No.</th>
+                                        <th>Product</th>
+                                        <th>Product Group</th>
+                                        <th>Product Code</th>
+                                        <th>Barcode No.</th>
+                                        <th>Image</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var i = 1;
+                                    }
+                                    @foreach (var item in Model.ItemHeadList)
+                                    {
+                                        <tr>
+                                            <td scope="row"><input type="checkbox" name="codeid[]" id="@item.id" value="@item.id" /> @i</td>
+                                            <td>@item.itemName</td>
+                                            <td>@item.ItemGroup</td>
+                                            <td>@item.ProductCode</td>
+                                            <td>@item.itemBarcode</td>
+                                            <td><img src="~/BarcodeImages/@item.itembarcodeimg" class="" /></td>
+                                            <td>
+                                                <a href="javascript:void(0)?pid=@item.id" class="getAllEMP" id="@item.id">
+                                                    <button type="button" class="btn btn-success rounded-pill px-4" data-target="#exampleModalCenter">Print</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                        
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog modal-lg">
+        <div id='myModalContent'></div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fsvs/1.2.2/js/bundle.min.js"></script>
+<script>
+    $(function () {
+        $(".getAllEMP").click(function () {
+            var $buttonClicked = $(this);
+            var str = $(this).attr("id");
+            var ajaxCallURL = '../Admin/BarcodePartial?pid=' + str;
+
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: ajaxCallURL,
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                success: function (data) {
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+                },
+                error: function () {
+                    alert("Content load failed.");
+                }
+            });
+        });
+        $("#closbtn").click(function () {
+            $('#myModal').modal('hide');
+        });
+    });
+</script>
+<script>
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#editor': function (element, renderer) {
+            return true;
+        }
+    };
+
+    $('#cmd').click(function () {
+        doc.fromHTML($('#content').html(), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+    });
+</script>
+
+<script>
+    function Getbarcode(ids, cont) {
+        alert(ids);
+        alert(cont);
+
+        var ajaxCallURL = '../Admin/GetBarcode?pid=' + ids;
+        var options = { "backdrop": "static", keyboard: true };
+        $.ajax({
+            type: "GET",
+            url: ajaxCallURL,
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            success: function (data) {
+                //var bar = data.itemBarcodeImage;
+                var val = ""; // Fix: Initialize val variable
+                var sv1 = $("#cnt").val();
+                //var sv1 = $("#cnt").attr(ids);
+                //alert(sv1);
+                for (var i = 0; i < sv1; i++) { // Fix: Change <= to <
+                    var bcrc = data.itemBarcodeImage;
+                    console.log(bcrc);
+                    var im = "<img src='data:image;base64," + bcrc + "' />"; // Fix: Concatenate bcrc variable
+                    val += im; // Fix: Change im + = to +=
+                }
+
+                // Do something with the val variable, e.g., append it to a container
+                $("#container").append(val);
+            },
+            error: function (ex) {
+                $("#price").val(0);
+                $("#sgstper").val(0);
+            }
+        });
+        return false;
+    };
+    function Getcount(ids) {
+
+    };
+</script>
+
+<script type="text/javascript">
+    $("#submit").click(function () {
+
+        var str = $(this).attr("id");
+        alert(str);
+        var per = document.getElementById('tid');
+
+        var sv = per.options[per.selectedIndex].value;
+
+        var per1 = document.getElementById('cnt');
+        alert("ok2");
+        var sv1 = per1.options[per1.selectedIndex].value;
+
+        var ajaxCallURL = '../Admin/GetBarcode?pid=' + sv;
+        var options = { "backdrop": "static", keyboard: true };
+        $.ajax({
+            type: "GET",
+            url: ajaxCallURL,
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            success: function (data) {
+                var bar = data.itemBarcodeImage;
+                var val = ""; // Fix: Initialize val variable
+
+                for (var i = 0; i < sv1; i++) { // Fix: Change <= to <
+                    var bcrc = data.itemBarcodeImage;
+                    console.log(bcrc);
+                    var im = "<img src='data:image;base64," + bcrc + "' />"; // Fix: Concatenate bcrc variable
+                    val += im; // Fix: Change im + = to +=
+                }
+
+                // Do something with the val variable, e.g., append it to a container
+                $("#container").append(val);
+            },
+            error: function (ex) {
+                $("#price").val(0);
+                $("#sgstper").val(0);
+            }
+        });
+        return false;
+    });
+
+
+</script>

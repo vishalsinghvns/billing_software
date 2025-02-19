@@ -1,0 +1,1096 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Preora_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Mst_AccGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+          <Property Name="is_deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Mst_AccHead">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="AccGroupid" Type="int" />
+          <Property Name="AccName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpeningAmount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="RegType" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccGST" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccPAN" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccContactPerson" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccArea" Type="nvarchar" MaxLength="500" />
+          <Property Name="AccAddress" Type="nvarchar(max)" />
+          <Property Name="AccCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccPincode" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="is_deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Mst_Company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="CompName" Type="nvarchar" MaxLength="500" />
+          <Property Name="NameOnInvoice" Type="nvarchar" MaxLength="500" />
+          <Property Name="CompAddress" Type="nvarchar(max)" />
+          <Property Name="CompCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompPin" Type="nvarchar" MaxLength="10" />
+          <Property Name="CompState" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompPhone1" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompPhone2" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompPhone3" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompPhone4" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompWebsite" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompPAN" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompGST" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompLogo" Type="nvarchar(max)" />
+          <Property Name="CompBankName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompIFSC" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompAccNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompAccName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Mst_ItemGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="ItemGroupCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ItemGroupName" Type="nvarchar" MaxLength="50" />
+          <Property Name="is_deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Mst_ItemHead">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="ItemGroup" Type="nvarchar" MaxLength="50" />
+          <Property Name="itemCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="itemName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="itemMRP" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="itemPurchaseRate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="itemSaleRate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="itemSaleAs" Type="nvarchar" MaxLength="50" />
+          <Property Name="itemSGST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="itemCGST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="itemIGST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="itemPurchaseTax" Type="bit" />
+          <Property Name="itemSaleTax" Type="bit" />
+          <Property Name="itemMeasureUnit" Type="nvarchar" MaxLength="500" />
+          <Property Name="itemOpenQty" Type="bigint" />
+          <Property Name="itemAvlQty" Type="bigint" />
+          <Property Name="itemOpenValue" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="itemHSN_SAC" Type="nvarchar" MaxLength="500" />
+          <Property Name="itembarcodeimg" Type="nvarchar(max)" />
+          <Property Name="itemBarcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="is_deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Mst_Shops">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Shop" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Mst_Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Uname" Type="nvarchar" MaxLength="500" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="rolename" Type="nvarchar" MaxLength="500" />
+          <Property Name="shopid" Type="int" />
+          <Property Name="is_deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Customers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="mobileno" Type="nvarchar" MaxLength="50" />
+          <Property Name="whatsapno" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="AnnDate" Type="date" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="NameNo" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_Menus">
+          <Key>
+            <PropertyRef Name="mid" />
+          </Key>
+          <Property Name="mid" Type="int" Nullable="false" />
+          <Property Name="menu_name" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_PRBill_Products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="PR_purchasebill_id" Type="int" />
+          <Property Name="PR_itemhead_id" Type="int" />
+          <Property Name="PR_item_rate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_item_qty" Type="bigint" />
+          <Property Name="PR_gross_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_disc_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_sgst_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_cgst_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_igst_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_HSN_SAC" Type="nvarchar" MaxLength="500" />
+          <Property Name="PR_finalprod_amt" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_PurchaseBill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="p_entrycode" Type="nvarchar" MaxLength="500" />
+          <Property Name="supllierid" Type="int" />
+          <Property Name="billdate" Type="date" />
+          <Property Name="duedate" Type="date" />
+          <Property Name="invoice_no" Type="nvarchar" MaxLength="500" />
+          <Property Name="GrossAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Discount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AdditionalDisc" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="S_GST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="C_GST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="I_GST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="LoadingCharge" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="FinalAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PaidAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="BalanceAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="pay_mode" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_PurchaseBill_Products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="purchasebill_id" Type="int" />
+          <Property Name="itemhead_id" Type="int" />
+          <Property Name="item_rate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="item_qty" Type="bigint" />
+          <Property Name="gross_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="disc_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="sgst_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="cgst_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="igst_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="HSN_SAC" Type="nvarchar" MaxLength="500" />
+          <Property Name="finalprod_amt" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_PurchaseReturnBill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="PR_code" Type="nvarchar" MaxLength="500" />
+          <Property Name="PR_suppid" Type="int" />
+          <Property Name="PR_billdate" Type="date" />
+          <Property Name="PR_duedate" Type="date" />
+          <Property Name="PR_invoiceno" Type="nvarchar" MaxLength="500" />
+          <Property Name="PR_GrossAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_Discount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_AdditionalDisc" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_S_GST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_C_GST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_I_GST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_LoadingCharge" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_FinalAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_PaidAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_BalanceAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PR_pay_mode" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_Repair">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="billno" Type="nvarchar" MaxLength="50" />
+          <Property Name="repairno" Type="nvarchar" MaxLength="50" />
+          <Property Name="Custmr" Type="nvarchar" MaxLength="50" />
+          <Property Name="phoneno" Type="nvarchar" MaxLength="50" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="usrid" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_RepairProduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="repbillid" Type="int" />
+          <Property Name="productid" Type="int" />
+          <Property Name="quanti" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tbl_SaleBill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" />
+          <Property Name="s_entrycode" Type="nvarchar" MaxLength="500" />
+          <Property Name="custname" Type="nvarchar" MaxLength="500" />
+          <Property Name="custphone" Type="nvarchar" MaxLength="20" />
+          <Property Name="billdate_s" Type="datetime" />
+          <Property Name="invoiceno" Type="nvarchar" MaxLength="500" />
+          <Property Name="GrossAmt_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Discount_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AdditionalDisc_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SGST_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CGST_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IGST_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="FinalAmt_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PaidAmt_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="BalanceAmt_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="paymode" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_SaleBill_Products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="salebillid" Type="int" />
+          <Property Name="itemheadid_s" Type="int" />
+          <Property Name="itemrate_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="itemqty_s" Type="bigint" />
+          <Property Name="gross_amt_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="discamount_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="sgstamt_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="cgstamt_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="igstamt_s" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="HSNSAC_s" Type="nvarchar" MaxLength="500" />
+          <Property Name="finalprice_s" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_SaleReturnBill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" />
+          <Property Name="SR_entrycode" Type="nvarchar" MaxLength="500" />
+          <Property Name="SR_custname" Type="nvarchar" MaxLength="500" />
+          <Property Name="SR_billdate" Type="date" />
+          <Property Name="SR_duedate" Type="date" />
+          <Property Name="SR_invoicetype" Type="nvarchar" MaxLength="500" />
+          <Property Name="SR_invoiceno" Type="nvarchar" MaxLength="500" />
+          <Property Name="SR_GrossAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_Discount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_AdditionalDisc" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_SGST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_CGST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_IGST" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_othercharge" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_FinalAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_PaidAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_BalanceAmt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_paymode" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_SRBill_Products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="SR_salebillid" Type="int" />
+          <Property Name="SR_itemheadid" Type="int" />
+          <Property Name="SR_itemrate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_itemqty" Type="bigint" />
+          <Property Name="SR_gross_amt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_discamount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_sgstamt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_cgstamt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_igstamt" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SR_HSNSAC" Type="nvarchar" MaxLength="500" />
+          <Property Name="SR_finalprice" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_SubMenu">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="int" Nullable="false" />
+          <Property Name="menu_id" Type="int" />
+          <Property Name="submenu_name" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_UserHasMenus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" />
+          <Property Name="m_id" Type="int" />
+          <Property Name="s_id" Type="int" />
+        </EntityType>
+        <EntityContainer Name="Preora_DBModelStoreContainer">
+          <EntitySet Name="Mst_AccGroup" EntityType="Self.Mst_AccGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mst_AccHead" EntityType="Self.Mst_AccHead" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mst_Company" EntityType="Self.Mst_Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mst_ItemGroup" EntityType="Self.Mst_ItemGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mst_ItemHead" EntityType="Self.Mst_ItemHead" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mst_Shops" EntityType="Self.Mst_Shops" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mst_Users" EntityType="Self.Mst_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Menus" EntityType="Self.tbl_Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PRBill_Products" EntityType="Self.tbl_PRBill_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PurchaseBill" EntityType="Self.tbl_PurchaseBill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PurchaseBill_Products" EntityType="Self.tbl_PurchaseBill_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PurchaseReturnBill" EntityType="Self.tbl_PurchaseReturnBill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Repair" EntityType="Self.tbl_Repair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_RepairProduct" EntityType="Self.tbl_RepairProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SaleBill" EntityType="Self.tbl_SaleBill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SaleBill_Products" EntityType="Self.tbl_SaleBill_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SaleReturnBill" EntityType="Self.tbl_SaleReturnBill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SRBill_Products" EntityType="Self.tbl_SRBill_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SubMenu" EntityType="Self.tbl_SubMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_UserHasMenus" EntityType="Self.tbl_UserHasMenus" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Preora_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Mst_AccGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="is_deleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Mst_AccHead">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="AccGroupid" Type="Int32" />
+          <Property Name="AccName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpeningAmount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="RegType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccGST" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccPAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccArea" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AccAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccPincode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="is_deleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Mst_Company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="CompName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NameOnInvoice" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CompAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompPin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CompState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompPhone1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompPhone2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompPhone3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompPhone4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompWebsite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompPAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompGST" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompLogo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompBankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompIFSC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompAccNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompAccName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Mst_ItemGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="ItemGroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemGroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="is_deleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Mst_ItemHead">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="ItemGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="itemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="itemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="itemMRP" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="itemPurchaseRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="itemSaleRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="itemSaleAs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="itemSGST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="itemCGST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="itemIGST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="itemPurchaseTax" Type="Boolean" />
+          <Property Name="itemSaleTax" Type="Boolean" />
+          <Property Name="itemMeasureUnit" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="itemOpenQty" Type="Int64" />
+          <Property Name="itemAvlQty" Type="Int64" />
+          <Property Name="itemOpenValue" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="itemHSN_SAC" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="itembarcodeimg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="itemBarcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="is_deleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Mst_Shops">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Shop" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Mst_Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Uname" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rolename" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="shopid" Type="Int32" />
+          <Property Name="is_deleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Customers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="mobileno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="whatsapno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="AnnDate" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameNo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_Menus">
+          <Key>
+            <PropertyRef Name="mid" />
+          </Key>
+          <Property Name="mid" Type="Int32" Nullable="false" />
+          <Property Name="menu_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_PRBill_Products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="PR_purchasebill_id" Type="Int32" />
+          <Property Name="PR_itemhead_id" Type="Int32" />
+          <Property Name="PR_item_rate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_item_qty" Type="Int64" />
+          <Property Name="PR_gross_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_disc_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_sgst_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_cgst_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_igst_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_HSN_SAC" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PR_finalprod_amt" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_PurchaseBill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="p_entrycode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="supllierid" Type="Int32" />
+          <Property Name="billdate" Type="DateTime" Precision="0" />
+          <Property Name="duedate" Type="DateTime" Precision="0" />
+          <Property Name="invoice_no" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GrossAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AdditionalDisc" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="S_GST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="C_GST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="I_GST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="LoadingCharge" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="FinalAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PaidAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="BalanceAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="pay_mode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_PurchaseBill_Products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="purchasebill_id" Type="Int32" />
+          <Property Name="itemhead_id" Type="Int32" />
+          <Property Name="item_rate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="item_qty" Type="Int64" />
+          <Property Name="gross_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="disc_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="sgst_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="cgst_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="igst_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="HSN_SAC" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="finalprod_amt" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_PurchaseReturnBill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="PR_code" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PR_suppid" Type="Int32" />
+          <Property Name="PR_billdate" Type="DateTime" Precision="0" />
+          <Property Name="PR_duedate" Type="DateTime" Precision="0" />
+          <Property Name="PR_invoiceno" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PR_GrossAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_Discount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_AdditionalDisc" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_S_GST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_C_GST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_I_GST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_LoadingCharge" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_FinalAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_PaidAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_BalanceAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PR_pay_mode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_Repair">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="billno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="repairno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Custmr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phoneno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="usrid" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_RepairProduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="repbillid" Type="Int32" />
+          <Property Name="productid" Type="Int32" />
+          <Property Name="quanti" Type="Int64" />
+        </EntityType>
+        <EntityType Name="tbl_SaleBill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="s_entrycode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="custname" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="custphone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="billdate_s" Type="DateTime" Precision="3" />
+          <Property Name="invoiceno" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GrossAmt_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Discount_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AdditionalDisc_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SGST_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CGST_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IGST_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="FinalAmt_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PaidAmt_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="BalanceAmt_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="paymode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_SaleBill_Products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="salebillid" Type="Int32" />
+          <Property Name="itemheadid_s" Type="Int32" />
+          <Property Name="itemrate_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="itemqty_s" Type="Int64" />
+          <Property Name="gross_amt_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="discamount_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="sgstamt_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="cgstamt_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="igstamt_s" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="HSNSAC_s" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="finalprice_s" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_SaleReturnBill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="SR_entrycode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SR_custname" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SR_billdate" Type="DateTime" Precision="0" />
+          <Property Name="SR_duedate" Type="DateTime" Precision="0" />
+          <Property Name="SR_invoicetype" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SR_invoiceno" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SR_GrossAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_Discount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_AdditionalDisc" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_SGST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_CGST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_IGST" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_othercharge" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_FinalAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_PaidAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_BalanceAmt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_paymode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_SRBill_Products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="SR_salebillid" Type="Int32" />
+          <Property Name="SR_itemheadid" Type="Int32" />
+          <Property Name="SR_itemrate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_itemqty" Type="Int64" />
+          <Property Name="SR_gross_amt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_discamount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_sgstamt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_cgstamt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_igstamt" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SR_HSNSAC" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SR_finalprice" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_SubMenu">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="Int32" Nullable="false" />
+          <Property Name="menu_id" Type="Int32" />
+          <Property Name="submenu_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_UserHasMenus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="m_id" Type="Int32" />
+          <Property Name="s_id" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="Preora_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Mst_AccGroup" EntityType="Self.Mst_AccGroup" />
+          <EntitySet Name="Mst_AccHead" EntityType="Self.Mst_AccHead" />
+          <EntitySet Name="Mst_Company" EntityType="Self.Mst_Company" />
+          <EntitySet Name="Mst_ItemGroup" EntityType="Self.Mst_ItemGroup" />
+          <EntitySet Name="Mst_ItemHead" EntityType="Self.Mst_ItemHead" />
+          <EntitySet Name="Mst_Shops" EntityType="Self.Mst_Shops" />
+          <EntitySet Name="Mst_Users" EntityType="Self.Mst_Users" />
+          <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" />
+          <EntitySet Name="tbl_Menus" EntityType="Self.tbl_Menus" />
+          <EntitySet Name="tbl_PRBill_Products" EntityType="Self.tbl_PRBill_Products" />
+          <EntitySet Name="tbl_PurchaseBill" EntityType="Self.tbl_PurchaseBill" />
+          <EntitySet Name="tbl_PurchaseBill_Products" EntityType="Self.tbl_PurchaseBill_Products" />
+          <EntitySet Name="tbl_PurchaseReturnBill" EntityType="Self.tbl_PurchaseReturnBill" />
+          <EntitySet Name="tbl_Repair" EntityType="Self.tbl_Repair" />
+          <EntitySet Name="tbl_RepairProduct" EntityType="Self.tbl_RepairProduct" />
+          <EntitySet Name="tbl_SaleBill" EntityType="Self.tbl_SaleBill" />
+          <EntitySet Name="tbl_SaleBill_Products" EntityType="Self.tbl_SaleBill_Products" />
+          <EntitySet Name="tbl_SaleReturnBill" EntityType="Self.tbl_SaleReturnBill" />
+          <EntitySet Name="tbl_SRBill_Products" EntityType="Self.tbl_SRBill_Products" />
+          <EntitySet Name="tbl_SubMenu" EntityType="Self.tbl_SubMenu" />
+          <EntitySet Name="tbl_UserHasMenus" EntityType="Self.tbl_UserHasMenus" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Preora_DBModelStoreContainer" CdmEntityContainer="Preora_DBEntities">
+          <EntitySetMapping Name="Mst_AccGroup">
+            <EntityTypeMapping TypeName="Preora_DBModel.Mst_AccGroup">
+              <MappingFragment StoreEntitySet="Mst_AccGroup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mst_AccHead">
+            <EntityTypeMapping TypeName="Preora_DBModel.Mst_AccHead">
+              <MappingFragment StoreEntitySet="Mst_AccHead">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="AccGroupid" ColumnName="AccGroupid" />
+                <ScalarProperty Name="AccName" ColumnName="AccName" />
+                <ScalarProperty Name="AccCode" ColumnName="AccCode" />
+                <ScalarProperty Name="OpeningAmount" ColumnName="OpeningAmount" />
+                <ScalarProperty Name="RegType" ColumnName="RegType" />
+                <ScalarProperty Name="AccGST" ColumnName="AccGST" />
+                <ScalarProperty Name="AccPAN" ColumnName="AccPAN" />
+                <ScalarProperty Name="AccContactPerson" ColumnName="AccContactPerson" />
+                <ScalarProperty Name="AccArea" ColumnName="AccArea" />
+                <ScalarProperty Name="AccAddress" ColumnName="AccAddress" />
+                <ScalarProperty Name="AccCity" ColumnName="AccCity" />
+                <ScalarProperty Name="AccPincode" ColumnName="AccPincode" />
+                <ScalarProperty Name="AccPhone" ColumnName="AccPhone" />
+                <ScalarProperty Name="AccEmail" ColumnName="AccEmail" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mst_Company">
+            <EntityTypeMapping TypeName="Preora_DBModel.Mst_Company">
+              <MappingFragment StoreEntitySet="Mst_Company">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="CompName" ColumnName="CompName" />
+                <ScalarProperty Name="NameOnInvoice" ColumnName="NameOnInvoice" />
+                <ScalarProperty Name="CompAddress" ColumnName="CompAddress" />
+                <ScalarProperty Name="CompCity" ColumnName="CompCity" />
+                <ScalarProperty Name="CompPin" ColumnName="CompPin" />
+                <ScalarProperty Name="CompState" ColumnName="CompState" />
+                <ScalarProperty Name="CompPhone1" ColumnName="CompPhone1" />
+                <ScalarProperty Name="CompPhone2" ColumnName="CompPhone2" />
+                <ScalarProperty Name="CompPhone3" ColumnName="CompPhone3" />
+                <ScalarProperty Name="CompPhone4" ColumnName="CompPhone4" />
+                <ScalarProperty Name="CompEmail" ColumnName="CompEmail" />
+                <ScalarProperty Name="CompWebsite" ColumnName="CompWebsite" />
+                <ScalarProperty Name="CompPAN" ColumnName="CompPAN" />
+                <ScalarProperty Name="CompGST" ColumnName="CompGST" />
+                <ScalarProperty Name="CompLogo" ColumnName="CompLogo" />
+                <ScalarProperty Name="CompBankName" ColumnName="CompBankName" />
+                <ScalarProperty Name="CompIFSC" ColumnName="CompIFSC" />
+                <ScalarProperty Name="CompAccNo" ColumnName="CompAccNo" />
+                <ScalarProperty Name="CompAccName" ColumnName="CompAccName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mst_ItemGroup">
+            <EntityTypeMapping TypeName="Preora_DBModel.Mst_ItemGroup">
+              <MappingFragment StoreEntitySet="Mst_ItemGroup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ItemGroupCode" ColumnName="ItemGroupCode" />
+                <ScalarProperty Name="ItemGroupName" ColumnName="ItemGroupName" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mst_ItemHead">
+            <EntityTypeMapping TypeName="Preora_DBModel.Mst_ItemHead">
+              <MappingFragment StoreEntitySet="Mst_ItemHead">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ItemGroup" ColumnName="ItemGroup" />
+                <ScalarProperty Name="itemCode" ColumnName="itemCode" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="itemMRP" ColumnName="itemMRP" />
+                <ScalarProperty Name="itemPurchaseRate" ColumnName="itemPurchaseRate" />
+                <ScalarProperty Name="itemSaleRate" ColumnName="itemSaleRate" />
+                <ScalarProperty Name="itemSaleAs" ColumnName="itemSaleAs" />
+                <ScalarProperty Name="itemSGST" ColumnName="itemSGST" />
+                <ScalarProperty Name="itemCGST" ColumnName="itemCGST" />
+                <ScalarProperty Name="itemIGST" ColumnName="itemIGST" />
+                <ScalarProperty Name="itemPurchaseTax" ColumnName="itemPurchaseTax" />
+                <ScalarProperty Name="itemSaleTax" ColumnName="itemSaleTax" />
+                <ScalarProperty Name="itemMeasureUnit" ColumnName="itemMeasureUnit" />
+                <ScalarProperty Name="itemOpenQty" ColumnName="itemOpenQty" />
+                <ScalarProperty Name="itemAvlQty" ColumnName="itemAvlQty" />
+                <ScalarProperty Name="itemOpenValue" ColumnName="itemOpenValue" />
+                <ScalarProperty Name="itemHSN_SAC" ColumnName="itemHSN_SAC" />
+                <ScalarProperty Name="itembarcodeimg" ColumnName="itembarcodeimg" />
+                <ScalarProperty Name="itemBarcode" ColumnName="itemBarcode" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mst_Shops">
+            <EntityTypeMapping TypeName="Preora_DBModel.Mst_Shops">
+              <MappingFragment StoreEntitySet="Mst_Shops">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Shop" ColumnName="Shop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mst_Users">
+            <EntityTypeMapping TypeName="Preora_DBModel.Mst_Users">
+              <MappingFragment StoreEntitySet="Mst_Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Uname" ColumnName="Uname" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="rolename" ColumnName="rolename" />
+                <ScalarProperty Name="shopid" ColumnName="shopid" />
+                <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Customers">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_Customers">
+              <MappingFragment StoreEntitySet="tbl_Customers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
+                <ScalarProperty Name="whatsapno" ColumnName="whatsapno" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="AnnDate" ColumnName="AnnDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NameNo" ColumnName="NameNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Menus">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_Menus">
+              <MappingFragment StoreEntitySet="tbl_Menus">
+                <ScalarProperty Name="mid" ColumnName="mid" />
+                <ScalarProperty Name="menu_name" ColumnName="menu_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PRBill_Products">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_PRBill_Products">
+              <MappingFragment StoreEntitySet="tbl_PRBill_Products">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="PR_purchasebill_id" ColumnName="PR_purchasebill_id" />
+                <ScalarProperty Name="PR_itemhead_id" ColumnName="PR_itemhead_id" />
+                <ScalarProperty Name="PR_item_rate" ColumnName="PR_item_rate" />
+                <ScalarProperty Name="PR_item_qty" ColumnName="PR_item_qty" />
+                <ScalarProperty Name="PR_gross_amt" ColumnName="PR_gross_amt" />
+                <ScalarProperty Name="PR_disc_amt" ColumnName="PR_disc_amt" />
+                <ScalarProperty Name="PR_sgst_amt" ColumnName="PR_sgst_amt" />
+                <ScalarProperty Name="PR_cgst_amt" ColumnName="PR_cgst_amt" />
+                <ScalarProperty Name="PR_igst_amt" ColumnName="PR_igst_amt" />
+                <ScalarProperty Name="PR_HSN_SAC" ColumnName="PR_HSN_SAC" />
+                <ScalarProperty Name="PR_finalprod_amt" ColumnName="PR_finalprod_amt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PurchaseBill">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_PurchaseBill">
+              <MappingFragment StoreEntitySet="tbl_PurchaseBill">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="p_entrycode" ColumnName="p_entrycode" />
+                <ScalarProperty Name="supllierid" ColumnName="supllierid" />
+                <ScalarProperty Name="billdate" ColumnName="billdate" />
+                <ScalarProperty Name="duedate" ColumnName="duedate" />
+                <ScalarProperty Name="invoice_no" ColumnName="invoice_no" />
+                <ScalarProperty Name="GrossAmt" ColumnName="GrossAmt" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="AdditionalDisc" ColumnName="AdditionalDisc" />
+                <ScalarProperty Name="S_GST" ColumnName="S_GST" />
+                <ScalarProperty Name="C_GST" ColumnName="C_GST" />
+                <ScalarProperty Name="I_GST" ColumnName="I_GST" />
+                <ScalarProperty Name="LoadingCharge" ColumnName="LoadingCharge" />
+                <ScalarProperty Name="FinalAmt" ColumnName="FinalAmt" />
+                <ScalarProperty Name="PaidAmt" ColumnName="PaidAmt" />
+                <ScalarProperty Name="BalanceAmt" ColumnName="BalanceAmt" />
+                <ScalarProperty Name="pay_mode" ColumnName="pay_mode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PurchaseBill_Products">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_PurchaseBill_Products">
+              <MappingFragment StoreEntitySet="tbl_PurchaseBill_Products">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="purchasebill_id" ColumnName="purchasebill_id" />
+                <ScalarProperty Name="itemhead_id" ColumnName="itemhead_id" />
+                <ScalarProperty Name="item_rate" ColumnName="item_rate" />
+                <ScalarProperty Name="item_qty" ColumnName="item_qty" />
+                <ScalarProperty Name="gross_amt" ColumnName="gross_amt" />
+                <ScalarProperty Name="disc_amt" ColumnName="disc_amt" />
+                <ScalarProperty Name="sgst_amt" ColumnName="sgst_amt" />
+                <ScalarProperty Name="cgst_amt" ColumnName="cgst_amt" />
+                <ScalarProperty Name="igst_amt" ColumnName="igst_amt" />
+                <ScalarProperty Name="HSN_SAC" ColumnName="HSN_SAC" />
+                <ScalarProperty Name="finalprod_amt" ColumnName="finalprod_amt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PurchaseReturnBill">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_PurchaseReturnBill">
+              <MappingFragment StoreEntitySet="tbl_PurchaseReturnBill">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="PR_code" ColumnName="PR_code" />
+                <ScalarProperty Name="PR_suppid" ColumnName="PR_suppid" />
+                <ScalarProperty Name="PR_billdate" ColumnName="PR_billdate" />
+                <ScalarProperty Name="PR_duedate" ColumnName="PR_duedate" />
+                <ScalarProperty Name="PR_invoiceno" ColumnName="PR_invoiceno" />
+                <ScalarProperty Name="PR_GrossAmt" ColumnName="PR_GrossAmt" />
+                <ScalarProperty Name="PR_Discount" ColumnName="PR_Discount" />
+                <ScalarProperty Name="PR_AdditionalDisc" ColumnName="PR_AdditionalDisc" />
+                <ScalarProperty Name="PR_S_GST" ColumnName="PR_S_GST" />
+                <ScalarProperty Name="PR_C_GST" ColumnName="PR_C_GST" />
+                <ScalarProperty Name="PR_I_GST" ColumnName="PR_I_GST" />
+                <ScalarProperty Name="PR_LoadingCharge" ColumnName="PR_LoadingCharge" />
+                <ScalarProperty Name="PR_FinalAmt" ColumnName="PR_FinalAmt" />
+                <ScalarProperty Name="PR_PaidAmt" ColumnName="PR_PaidAmt" />
+                <ScalarProperty Name="PR_BalanceAmt" ColumnName="PR_BalanceAmt" />
+                <ScalarProperty Name="PR_pay_mode" ColumnName="PR_pay_mode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Repair">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_Repair">
+              <MappingFragment StoreEntitySet="tbl_Repair">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="billno" ColumnName="billno" />
+                <ScalarProperty Name="repairno" ColumnName="repairno" />
+                <ScalarProperty Name="Custmr" ColumnName="Custmr" />
+                <ScalarProperty Name="phoneno" ColumnName="phoneno" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="usrid" ColumnName="usrid" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_RepairProduct">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_RepairProduct">
+              <MappingFragment StoreEntitySet="tbl_RepairProduct">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="repbillid" ColumnName="repbillid" />
+                <ScalarProperty Name="productid" ColumnName="productid" />
+                <ScalarProperty Name="quanti" ColumnName="quanti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SaleBill">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_SaleBill">
+              <MappingFragment StoreEntitySet="tbl_SaleBill">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="s_entrycode" ColumnName="s_entrycode" />
+                <ScalarProperty Name="custname" ColumnName="custname" />
+                <ScalarProperty Name="custphone" ColumnName="custphone" />
+                <ScalarProperty Name="billdate_s" ColumnName="billdate_s" />
+                <ScalarProperty Name="invoiceno" ColumnName="invoiceno" />
+                <ScalarProperty Name="GrossAmt_s" ColumnName="GrossAmt_s" />
+                <ScalarProperty Name="Discount_s" ColumnName="Discount_s" />
+                <ScalarProperty Name="AdditionalDisc_s" ColumnName="AdditionalDisc_s" />
+                <ScalarProperty Name="SGST_s" ColumnName="SGST_s" />
+                <ScalarProperty Name="CGST_s" ColumnName="CGST_s" />
+                <ScalarProperty Name="IGST_s" ColumnName="IGST_s" />
+                <ScalarProperty Name="FinalAmt_s" ColumnName="FinalAmt_s" />
+                <ScalarProperty Name="PaidAmt_s" ColumnName="PaidAmt_s" />
+                <ScalarProperty Name="BalanceAmt_s" ColumnName="BalanceAmt_s" />
+                <ScalarProperty Name="paymode" ColumnName="paymode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SaleBill_Products">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_SaleBill_Products">
+              <MappingFragment StoreEntitySet="tbl_SaleBill_Products">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="salebillid" ColumnName="salebillid" />
+                <ScalarProperty Name="itemheadid_s" ColumnName="itemheadid_s" />
+                <ScalarProperty Name="itemrate_s" ColumnName="itemrate_s" />
+                <ScalarProperty Name="itemqty_s" ColumnName="itemqty_s" />
+                <ScalarProperty Name="gross_amt_s" ColumnName="gross_amt_s" />
+                <ScalarProperty Name="discamount_s" ColumnName="discamount_s" />
+                <ScalarProperty Name="sgstamt_s" ColumnName="sgstamt_s" />
+                <ScalarProperty Name="cgstamt_s" ColumnName="cgstamt_s" />
+                <ScalarProperty Name="igstamt_s" ColumnName="igstamt_s" />
+                <ScalarProperty Name="HSNSAC_s" ColumnName="HSNSAC_s" />
+                <ScalarProperty Name="finalprice_s" ColumnName="finalprice_s" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SaleReturnBill">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_SaleReturnBill">
+              <MappingFragment StoreEntitySet="tbl_SaleReturnBill">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="SR_entrycode" ColumnName="SR_entrycode" />
+                <ScalarProperty Name="SR_custname" ColumnName="SR_custname" />
+                <ScalarProperty Name="SR_billdate" ColumnName="SR_billdate" />
+                <ScalarProperty Name="SR_duedate" ColumnName="SR_duedate" />
+                <ScalarProperty Name="SR_invoicetype" ColumnName="SR_invoicetype" />
+                <ScalarProperty Name="SR_invoiceno" ColumnName="SR_invoiceno" />
+                <ScalarProperty Name="SR_GrossAmt" ColumnName="SR_GrossAmt" />
+                <ScalarProperty Name="SR_Discount" ColumnName="SR_Discount" />
+                <ScalarProperty Name="SR_AdditionalDisc" ColumnName="SR_AdditionalDisc" />
+                <ScalarProperty Name="SR_SGST" ColumnName="SR_SGST" />
+                <ScalarProperty Name="SR_CGST" ColumnName="SR_CGST" />
+                <ScalarProperty Name="SR_IGST" ColumnName="SR_IGST" />
+                <ScalarProperty Name="SR_othercharge" ColumnName="SR_othercharge" />
+                <ScalarProperty Name="SR_FinalAmt" ColumnName="SR_FinalAmt" />
+                <ScalarProperty Name="SR_PaidAmt" ColumnName="SR_PaidAmt" />
+                <ScalarProperty Name="SR_BalanceAmt" ColumnName="SR_BalanceAmt" />
+                <ScalarProperty Name="SR_paymode" ColumnName="SR_paymode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SRBill_Products">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_SRBill_Products">
+              <MappingFragment StoreEntitySet="tbl_SRBill_Products">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SR_salebillid" ColumnName="SR_salebillid" />
+                <ScalarProperty Name="SR_itemheadid" ColumnName="SR_itemheadid" />
+                <ScalarProperty Name="SR_itemrate" ColumnName="SR_itemrate" />
+                <ScalarProperty Name="SR_itemqty" ColumnName="SR_itemqty" />
+                <ScalarProperty Name="SR_gross_amt" ColumnName="SR_gross_amt" />
+                <ScalarProperty Name="SR_discamount" ColumnName="SR_discamount" />
+                <ScalarProperty Name="SR_sgstamt" ColumnName="SR_sgstamt" />
+                <ScalarProperty Name="SR_cgstamt" ColumnName="SR_cgstamt" />
+                <ScalarProperty Name="SR_igstamt" ColumnName="SR_igstamt" />
+                <ScalarProperty Name="SR_HSNSAC" ColumnName="SR_HSNSAC" />
+                <ScalarProperty Name="SR_finalprice" ColumnName="SR_finalprice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SubMenu">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_SubMenu">
+              <MappingFragment StoreEntitySet="tbl_SubMenu">
+                <ScalarProperty Name="sid" ColumnName="sid" />
+                <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+                <ScalarProperty Name="submenu_name" ColumnName="submenu_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_UserHasMenus">
+            <EntityTypeMapping TypeName="Preora_DBModel.tbl_UserHasMenus">
+              <MappingFragment StoreEntitySet="tbl_UserHasMenus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="m_id" ColumnName="m_id" />
+                <ScalarProperty Name="s_id" ColumnName="s_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

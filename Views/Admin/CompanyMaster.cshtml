@@ -1,0 +1,176 @@
+﻿@model Preora.Models.CompanyModel
+@{
+    ViewBag.Title = "EditCompMaster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-titles">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active"><a href="/Admin/Index">Home</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Company Master</a></li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h4 class="mb-0 text-white">Company Master Form</h4>
+                </div>
+                @using (Html.BeginForm("CompanyMaster", "Admin", FormMethod.Post, new { @encType = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(x => x.id)
+                    @Html.HiddenFor(x => x.CompLogo)
+                    <div class="card-body pb-0">
+                        <h4 class="card-title">Personal Information</h4>
+                        <hr />
+                        <div class="row pt-3">
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="control-label">Company Name</label>
+                                    @Html.TextBoxFor(x => x.CompName, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Name on Invoice</label>
+                                    @Html.TextBoxFor(x => x.NameOnInvoice, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    <label class="control-label">Company PAN</label>
+                                    @Html.TextBoxFor(x => x.CompPAN, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="control-label">Company GST</label>
+                                    @Html.TextBoxFor(x => x.CompGST, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <label for="bsValidation5" class="form-label">Logo</label>
+                                @Html.TextBoxFor(x => x.file, new { @type = "file", @class = "form-control", @name = "file", @id = "file" })
+
+                            </div>
+                            <di class="col-lg-4">
+                                <img src="/CompanyImg/@Model.CompLogo" class="rounded-circle" style="width:100px;height:70px;" />
+                            </di>
+                        </div>
+
+                    </div>
+                    <div class="card-body pb-0">
+                        <h4 class="card-title">Contact Info</h4>
+                        <hr />
+                        <div class="row pt-3">
+
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Company Email</label>
+                                    @Html.TextBoxFor(x => x.CompEmail, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Company Website</label>
+                                    @Html.TextBoxFor(x => x.CompWebsite, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Company Phone1</label>
+                                    @Html.TextBoxFor(x => x.CompPhone1, new { @type = "number", @class = "form-control", @maxlength = "10" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Company Phone2</label>
+                                    @Html.TextBoxFor(x => x.CompPhone2, new { @type = "number", @class = "form-control", @maxlength = "10" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Company Phone3</label>
+                                    @Html.TextBoxFor(x => x.CompPhone3, new { @type = "number", @class = "form-control", @maxlength = "10" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Company Phone4</label>
+                                    @Html.TextBoxFor(x => x.CompPhone4, new { @type = "number", @class = "form-control", @maxlength = "10" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <h4 class="card-title">Address</h4>
+                        <hr />
+                        <div class="row pt-3">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label">Address</label>
+                                    @Html.TextBoxFor(x => x.CompAddress, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label">City</label>
+                                    @Html.TextBoxFor(x => x.CompCity, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label">State</label>
+                                    @Html.TextBoxFor(x => x.CompState, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label">Pincode</label>
+                                    @Html.TextBoxFor(x => x.CompPin, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <h4 class="card-title">Banking</h4>
+                        <hr />
+                        <div class="row pt-3">
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="control-label">Bank Name</label>
+                                    @Html.TextBoxFor(x => x.CompBankName, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="control-label">Account Holder Name</label>
+                                    @Html.TextBoxFor(x => x.CompAccName, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="control-label">IfSC Code</label>
+                                    @Html.TextBoxFor(x => x.CompIFSC, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="control-label">Account Number</label>
+                                    @Html.TextBoxFor(x => x.CompAccNo, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-dark">
+                            Save
+                        </button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

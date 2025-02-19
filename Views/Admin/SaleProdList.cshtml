@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Preora.Models.SaleEntryModel>
+@{
+    ViewBag.Title = "SaleProdList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h4 class="card-title mb-0">Sale Products List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="file_export" class="table table-striped table-bordered display">
+                            <thead class="bg-info">
+                                <tr>
+                                    <th class="text-white">S. No.</th>
+                                    <th class="text-white">Bill Date</th>
+                                    <th class="text-white">Product</th>
+                                    <th class="text-white">Unit</th>
+                                    <th class="text-white">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@Html.DisplayFor(modelItem => @item.billdate_s)</td>
+                                        <td>@item.prod_name</td>
+                                        <td>@item.measurunit</td>
+                                        <td>@item.itemqty_s</td>
+
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

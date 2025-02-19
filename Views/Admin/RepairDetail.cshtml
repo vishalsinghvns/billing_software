@@ -1,0 +1,254 @@
+﻿@model Preora.Models.RepairVM
+@{
+    ViewBag.Title = "SaleEntryDetail";
+    Layout = null;
+}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+        @@media print {
+            body {
+                width: 300px;
+                margin: 0px auto
+            }
+
+            @@page {
+                width: 210mm;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        th {
+            font-size: 12px
+        }
+
+        td {
+            font-size: 10px
+        }
+
+        .container {
+            display: block;
+            width: 100%;
+            background: #fff;
+            max-width: 300px;
+            padding: 25px;
+            margin: 50px auto 0;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        }
+
+        .receipt_header {
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #000;
+            text-align: center;
+        }
+
+            .receipt_header h1 {
+                font-size: 20px;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+            }
+
+                .receipt_header h1 span {
+                    display: block;
+                    font-size: 25px;
+                }
+
+            .receipt_header h2 {
+                font-size: 14px;
+                color: #727070;
+                font-weight: 300;
+            }
+
+                .receipt_header h2 span {
+                    display: block;
+                }
+
+        .receipt_body {
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        thead, tfoot {
+            position: relative;
+        }
+
+            thead th:not(:last-child) {
+                text-align: left;
+            }
+
+            thead th:last-child {
+                text-align: right;
+            }
+
+            thead::after {
+                content: '';
+                width: 100%;
+                border-bottom: 1px dashed #000;
+                display: block;
+                position: absolute;
+            }
+
+            tbody td:not(:last-child), tfoot td:not(:last-child) {
+                text-align: left;
+            }
+
+            tbody td:last-child, tfoot td:last-child {
+                text-align: right;
+            }
+
+        tbody tr:first-child td {
+            padding-top: 10px;
+        }
+
+        tbody tr:last-child td {
+            padding-bottom: 5px;
+        }
+
+        tfoot tr:first-child td {
+            padding-top: 15px;
+        }
+
+        tfoot::before {
+            content: '';
+            width: 100%;
+            border-top: 1px dashed #000;
+            display: block;
+            position: absolute;
+        }
+
+        tfoot tr:first-child td:first-child, tfoot tr:first-child td:last-child {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .date_time_con {
+            /* display: flex;*/
+            justify-content: center;
+            column-gap: 25px;
+        }
+
+        .items {
+            margin-top: 25px;
+        }
+
+        h3 {
+            padding-top: 5px;
+            margin-top: 5px;
+            font-size: 1rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        h4 {
+            padding-top: 5px;
+            margin-top: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-right mb-3">
+                <a href="javascript:void(0);" class="btn btn-primary" onclick="printContent('dvmismatch')">Print</a>
+            </div>
+        </div>
+        <div id="dvmismatch">
+            <div class="receipt_header">
+                <img src="/CompanyImg/@Model.CompLogo" class="rounded-circle" style="height:50px;" />
+                <h2>@Model.CompName</h2>
+                <h2>@Model.CompAdd, @Model.CompCity, (@Model.CompState)</h2>
+                <h2>@Model.CompGST</h2>
+            </div>
+            @foreach (var item in Model.BillVM)
+            {
+                <div class="receipt_body">
+                    <div class="date_time_con">
+                        <div class="date">Memo No. : @item.repairno</div>
+                        <div class="date">Date : @item.date</div>
+                        <div class="date">Cashier : @item.Usrname</div>
+                        <div class="date">Customer : @item.Custmr</div>
+                        <div class="date">Mobile No : @item.phoneno</div>
+                    </div>
+
+                    <div class="items">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Product</th>
+                                    <th>Qty</th>
+                                    
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var prd in Model.productVM)
+                                {
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@prd.prod_name</td>
+                                        <td>@prd.quanti</td>
+                                        
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tfoot>
+                                <tr>
+                                    <td>Amount</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>@item.Amount</td>
+                                </tr>
+
+                                
+                            </tfoot>
+
+                        </table>
+                       
+                    </div>
+                </div>
+                <h4>* No Exchange No Return *</h4>
+                <h3>* Thank you! Please visit again *</h3>
+            }
+
+        </div>
+    </div>
+    <script>
+        function printContent(el) {
+            var restorepage = document.body.innerHTML;
+            var printcontent = document.getElementById(el).innerHTML;
+            document.body.innerHTML = printcontent;
+            window.print();
+            document.body.innerHTML = restorepage;
+        }
+    </script>
+</body>
+</html>

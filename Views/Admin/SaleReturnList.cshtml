@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Preora.Models.SaleReturnModel>
+@{
+    ViewBag.Title = "SaleEntryList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h4 class="card-title mb-0">Sale Return List</h4>
+                <a href="~/Admin/SaleReturn" class="btn btn-dark btn-sm"><i class="fa fa-plus"></i> Add Sale Return</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="file_export" class="table table-striped table-bordered display">
+                        <thead class="bg-info">
+                            <tr>
+                                <th class="text-white">S. No.</th>
+                                <th class="text-white">Bill Number</th>
+                                <th class="text-white">Customer</th>
+                                <th class="text-white">Shop</th>
+                                <th class="text-white">Bill By</th>
+                                @*<th>Invoice #</th>
+                                <th>Invoice Type</th>*@
+                                <th class="text-white">Bill Date</th>
+                                @*<th>Due Date</th>*@
+                                <th class="text-white">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var i = 1;
+                            }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td><a href="@Url.Action("SaleReturnDetail", "Admin", new { c_id = item.id })">@item.SR_entrycode</a></td>
+                                    <td>@item.SR_cust_name</td>
+                                    <td>@item.SRshopname</td>
+                                    <td>@item.SRUsrname</td>
+                                    @*<td>@item.SR_invoiceno</td>
+                                    <td>@item.SR_invoicetype</td>*@
+                                    <td>@Html.DisplayFor(modelItem => @item.SR_billdate)</td>
+                                    @*<td>@Html.DisplayFor(modelItem => @item.SR_duedate)</td>*@
+                                    <td>@item.SR_FinalAmt</td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

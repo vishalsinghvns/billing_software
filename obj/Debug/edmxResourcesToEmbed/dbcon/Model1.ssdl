@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Preora_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Mst_AccGroup">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="GroupCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+    <Property Name="is_deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Mst_AccHead">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="AccGroupid" Type="int" />
+    <Property Name="AccName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="OpeningAmount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="RegType" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccGST" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccPAN" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccContactPerson" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccArea" Type="nvarchar" MaxLength="500" />
+    <Property Name="AccAddress" Type="nvarchar(max)" />
+    <Property Name="AccCity" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccPincode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="is_deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Mst_Company">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="CompName" Type="nvarchar" MaxLength="500" />
+    <Property Name="NameOnInvoice" Type="nvarchar" MaxLength="500" />
+    <Property Name="CompAddress" Type="nvarchar(max)" />
+    <Property Name="CompCity" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompPin" Type="nvarchar" MaxLength="10" />
+    <Property Name="CompState" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompPhone1" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompPhone2" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompPhone3" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompPhone4" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompWebsite" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompPAN" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompGST" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompLogo" Type="nvarchar(max)" />
+    <Property Name="CompBankName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompIFSC" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompAccNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompAccName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Mst_ItemGroup">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="ItemGroupCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="ItemGroupName" Type="nvarchar" MaxLength="50" />
+    <Property Name="is_deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Mst_ItemHead">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="ItemGroup" Type="nvarchar" MaxLength="50" />
+    <Property Name="itemCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="itemName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="itemMRP" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="itemPurchaseRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="itemSaleRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="itemSaleAs" Type="nvarchar" MaxLength="50" />
+    <Property Name="itemSGST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="itemCGST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="itemIGST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="itemPurchaseTax" Type="bit" />
+    <Property Name="itemSaleTax" Type="bit" />
+    <Property Name="itemMeasureUnit" Type="nvarchar" MaxLength="500" />
+    <Property Name="itemOpenQty" Type="bigint" />
+    <Property Name="itemAvlQty" Type="bigint" />
+    <Property Name="itemOpenValue" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="itemHSN_SAC" Type="nvarchar" MaxLength="500" />
+    <Property Name="itembarcodeimg" Type="nvarchar(max)" />
+    <Property Name="itemBarcode" Type="nvarchar" MaxLength="50" />
+    <Property Name="is_deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Mst_Shops">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Shop" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Mst_Users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Uname" Type="nvarchar" MaxLength="500" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+    <Property Name="rolename" Type="nvarchar" MaxLength="500" />
+    <Property Name="shopid" Type="int" />
+    <Property Name="is_deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbl_Customers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="mobileno" Type="nvarchar" MaxLength="50" />
+    <Property Name="whatsapno" Type="nvarchar" MaxLength="50" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="AnnDate" Type="date" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="NameNo" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tbl_Menus">
+    <Key>
+      <PropertyRef Name="mid" />
+    </Key>
+    <Property Name="mid" Type="int" Nullable="false" />
+    <Property Name="menu_name" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tbl_PRBill_Products">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="PR_purchasebill_id" Type="int" />
+    <Property Name="PR_itemhead_id" Type="int" />
+    <Property Name="PR_item_rate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_item_qty" Type="bigint" />
+    <Property Name="PR_gross_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_disc_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_sgst_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_cgst_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_igst_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_HSN_SAC" Type="nvarchar" MaxLength="500" />
+    <Property Name="PR_finalprod_amt" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="tbl_PurchaseBill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="p_entrycode" Type="nvarchar" MaxLength="500" />
+    <Property Name="supllierid" Type="int" />
+    <Property Name="billdate" Type="date" />
+    <Property Name="duedate" Type="date" />
+    <Property Name="invoice_no" Type="nvarchar" MaxLength="500" />
+    <Property Name="GrossAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Discount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="AdditionalDisc" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="S_GST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="C_GST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="I_GST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="LoadingCharge" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="FinalAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PaidAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="BalanceAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="pay_mode" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tbl_PurchaseBill_Products">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="purchasebill_id" Type="int" />
+    <Property Name="itemhead_id" Type="int" />
+    <Property Name="item_rate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="item_qty" Type="bigint" />
+    <Property Name="gross_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="disc_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="sgst_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="cgst_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="igst_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="HSN_SAC" Type="nvarchar" MaxLength="500" />
+    <Property Name="finalprod_amt" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="tbl_PurchaseReturnBill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="PR_code" Type="nvarchar" MaxLength="500" />
+    <Property Name="PR_suppid" Type="int" />
+    <Property Name="PR_billdate" Type="date" />
+    <Property Name="PR_duedate" Type="date" />
+    <Property Name="PR_invoiceno" Type="nvarchar" MaxLength="500" />
+    <Property Name="PR_GrossAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_Discount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_AdditionalDisc" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_S_GST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_C_GST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_I_GST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_LoadingCharge" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_FinalAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_PaidAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_BalanceAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PR_pay_mode" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tbl_Repair">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="billno" Type="nvarchar" MaxLength="50" />
+    <Property Name="repairno" Type="nvarchar" MaxLength="50" />
+    <Property Name="Custmr" Type="nvarchar" MaxLength="50" />
+    <Property Name="phoneno" Type="nvarchar" MaxLength="50" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="usrid" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_RepairProduct">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="repbillid" Type="int" />
+    <Property Name="productid" Type="int" />
+    <Property Name="quanti" Type="bigint" />
+  </EntityType>
+  <EntityType Name="tbl_SaleBill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="userid" Type="int" />
+    <Property Name="s_entrycode" Type="nvarchar" MaxLength="500" />
+    <Property Name="custname" Type="nvarchar" MaxLength="500" />
+    <Property Name="custphone" Type="nvarchar" MaxLength="20" />
+    <Property Name="billdate_s" Type="datetime" />
+    <Property Name="invoiceno" Type="nvarchar" MaxLength="500" />
+    <Property Name="GrossAmt_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Discount_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="AdditionalDisc_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SGST_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="CGST_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="IGST_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="FinalAmt_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PaidAmt_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="BalanceAmt_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="paymode" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tbl_SaleBill_Products">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="salebillid" Type="int" />
+    <Property Name="itemheadid_s" Type="int" />
+    <Property Name="itemrate_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="itemqty_s" Type="bigint" />
+    <Property Name="gross_amt_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="discamount_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="sgstamt_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="cgstamt_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="igstamt_s" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="HSNSAC_s" Type="nvarchar" MaxLength="500" />
+    <Property Name="finalprice_s" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="tbl_SaleReturnBill">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="userid" Type="int" />
+    <Property Name="SR_entrycode" Type="nvarchar" MaxLength="500" />
+    <Property Name="SR_custname" Type="nvarchar" MaxLength="500" />
+    <Property Name="SR_billdate" Type="date" />
+    <Property Name="SR_duedate" Type="date" />
+    <Property Name="SR_invoicetype" Type="nvarchar" MaxLength="500" />
+    <Property Name="SR_invoiceno" Type="nvarchar" MaxLength="500" />
+    <Property Name="SR_GrossAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_Discount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_AdditionalDisc" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_SGST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_CGST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_IGST" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_othercharge" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_FinalAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_PaidAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_BalanceAmt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_paymode" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tbl_SRBill_Products">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="SR_salebillid" Type="int" />
+    <Property Name="SR_itemheadid" Type="int" />
+    <Property Name="SR_itemrate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_itemqty" Type="bigint" />
+    <Property Name="SR_gross_amt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_discamount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_sgstamt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_cgstamt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_igstamt" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="SR_HSNSAC" Type="nvarchar" MaxLength="500" />
+    <Property Name="SR_finalprice" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="tbl_SubMenu">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="int" Nullable="false" />
+    <Property Name="menu_id" Type="int" />
+    <Property Name="submenu_name" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tbl_UserHasMenus">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="userid" Type="int" />
+    <Property Name="m_id" Type="int" />
+    <Property Name="s_id" Type="int" />
+  </EntityType>
+  <EntityContainer Name="Preora_DBModelStoreContainer">
+    <EntitySet Name="Mst_AccGroup" EntityType="Self.Mst_AccGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mst_AccHead" EntityType="Self.Mst_AccHead" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mst_Company" EntityType="Self.Mst_Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mst_ItemGroup" EntityType="Self.Mst_ItemGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mst_ItemHead" EntityType="Self.Mst_ItemHead" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mst_Shops" EntityType="Self.Mst_Shops" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mst_Users" EntityType="Self.Mst_Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Menus" EntityType="Self.tbl_Menus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_PRBill_Products" EntityType="Self.tbl_PRBill_Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_PurchaseBill" EntityType="Self.tbl_PurchaseBill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_PurchaseBill_Products" EntityType="Self.tbl_PurchaseBill_Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_PurchaseReturnBill" EntityType="Self.tbl_PurchaseReturnBill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Repair" EntityType="Self.tbl_Repair" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_RepairProduct" EntityType="Self.tbl_RepairProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SaleBill" EntityType="Self.tbl_SaleBill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SaleBill_Products" EntityType="Self.tbl_SaleBill_Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SaleReturnBill" EntityType="Self.tbl_SaleReturnBill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SRBill_Products" EntityType="Self.tbl_SRBill_Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SubMenu" EntityType="Self.tbl_SubMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_UserHasMenus" EntityType="Self.tbl_UserHasMenus" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

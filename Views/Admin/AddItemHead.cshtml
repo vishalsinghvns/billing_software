@@ -1,0 +1,181 @@
+﻿@model Preora.Models.ItemHeadModel
+@{
+    ViewBag.Title = "AddAccHead";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="page-titles">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active"><a href="/Admin/Index">Home</a></li>
+            <li class="breadcrumb-item">Item Head</li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h4 class="mb-0 text-white">Add/Update Item Heads</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("AddItemHead", "Admin", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(x => x.id)
+                        @Html.HiddenFor(x => x.itemCode)
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Item Head Name</label>
+                                    @Html.TextBoxFor(x => x.itemName, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Item Group</label>
+                                    @Html.TextBoxFor(x => x.ItemGroup, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Measurement Unit</label>
+                                    <select name="itemMeasureUnit" class="form-control">
+                                        <option value="Piece">Piece</option>
+                                        <option value="Pair">Pair</option>
+                                        <option value="Set">Set</option>
+                                    </select>
+                                    @*@Html.TextBoxFor(x => x.itemMeasureUnit, new { @type = "text", @class = "form-control" })*@
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="control-label">Product Code</label>
+                                    @Html.TextBoxFor(x => x.ProductCode, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="control-label">HSN/SAC</label>
+                                    @Html.TextBoxFor(x => x.itemHSN_SAC, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="control-label">MRP</label>
+                                    @Html.TextBoxFor(x => x.itemMRP, new { @type = "text", @class = "form-control number_decimal", @id = "price" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="control-label">Purchase Rate</label>
+                                    @Html.TextBoxFor(x => x.itemPurchaseRate, new { @type = "text", @class = "form-control number_decimal" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr />
+                        <h4 class="card-title">BARCODE SECTION</h4>
+                        <div class="row pt-3">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label">Barcode No.</label>
+                                    @Html.TextBoxFor(x => x.itemBarcode, new { @type = "text", @class = "form-control number_decimal" })
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                        </div>
+                        <hr />
+                        <h4 class="card-title">GST</h4>
+                        <div class="row pt-3">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">SGST(%)</label>
+                                    @Html.TextBoxFor(x => x.itemSGST, new { @type = "text", @class = "form-control number_decimal" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">CGST(%)</label>
+                                    @Html.TextBoxFor(x => x.itemCGST, new { @type = "text", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                        </div>
+                        <hr />
+                        <h4 class="card-title">OPENING BALANCE</h4>
+                        <div class="row pt-3">
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label">Stock Qty</label>
+                                    @Html.TextBoxFor(x => x.itemOpenQty, new { @type = "number", @class = "form-control", @id = "qty", @required = "required", @onchange = "javascript:stockvalue();" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="control-label">Stock Value</label>
+                                    @Html.TextBoxFor(x => x.itemOpenValue, new { @type = "text", @class = "form-control number_decimal", @id = "total" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr />
+                        <button type="submit" class="btn btn-dark">
+                            Save
+                        </button>
+
+                    }
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h4 class="mb-0 text-white">Upload Excel</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center flex-wrap">
+                        @using (Html.BeginForm("DownloadExcel", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <button type="submit"
+                                    class="mt-4 btn-block btn btn-outline-light">
+                                <i class="fa fa-download" aria-hidden="true"></i>&emsp; Excel Format
+                            </button>
+                        }
+                    </div>
+                    @using (Html.BeginForm("ImportExcel", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="control-label">Upload Excel</label>
+                                    @*@Html.TextBoxFor(x => x.excelfile, new { @type = "file", @class = "form-control" })*@
+                                    <input type="file" accept=".xls,.xlsx" class="form-control" name="excelfile" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn btn-dark"> Save </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+        <script>
+            function stockvalue() {
+                var qty = $("#qty").val();
+                var pri = $("#price").val();
+                var total = qty * pri;
+                $("#total").val(total);
+
+            }
+        </script>
